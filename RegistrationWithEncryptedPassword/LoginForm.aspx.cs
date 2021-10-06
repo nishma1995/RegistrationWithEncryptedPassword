@@ -36,7 +36,7 @@ namespace RegistrationWithEncryptedPassword
                 employee.Name = reader["Name"].ToString();
                 employee.Password = reader["Password"].ToString();
             }
-            return emplo;
+           
 
 
         }
