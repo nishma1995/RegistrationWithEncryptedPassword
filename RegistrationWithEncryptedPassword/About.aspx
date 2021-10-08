@@ -10,9 +10,9 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="Label" runat="server" Text="Label"></asp:Label>
         <p>
-            <asp:Button ID="btnLogout" runat="server" Text="Logout" />
+            <asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Logout" />
         </p>
     </form>
 </body>

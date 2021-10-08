@@ -1,6 +1,7 @@
 ﻿using RegistrationWithEncryptedPassword.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -13,33 +14,20 @@ namespace RegistrationWithEncryptedPassword
     public partial class LoginForm : System.Web.UI.Page
     {
         string decryptedpassword;
-        string connectionString = "Server=DESKTOP-LHCIT1T\\SQLEXPRESS;Database=RegistrationManagementSystem;Trusted_Connection=True";
+        DataLayer dataLayer = new DataLayer();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
+
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-
-            SqlCommand command = new SqlCommand("SetLogin", connection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("Name", txtName.Text);
-            command.Parameters.AddWithValue("Password", decryptedpassword);
-            SqlDataReader reader = command.ExecuteReader();
-
-
-            Employee employee = new Employee();
-            if (reader.Read())
-                employee.Name = reader["Name"].ToString();
-                employee.Password = reader["Password"].ToString();
-            }
+            setLogin();
            
-
-
         }
+
         private void decryptPassword(string encryptedPassword)
         {
             string decryptPassword = string.Empty;
@@ -51,6 +39,42 @@ namespace RegistrationWithEncryptedPassword
             decoder.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
             decryptPassword = new string(decoded_char);
             decryptedpassword = decryptPassword;
-        }
+        }       //function to decrypt password
+        public void setLogin()
+        {
+            string connect = dataLayer.connection.ToString();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+
+                SqlCommand command = new SqlCommand("SetLogin", con);
+                con.Open();
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("Name", txtName.Text);
+
+                SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                dataAdapter.SelectCommand = command;
+                DataSet data = new DataSet();
+                dataAdapter.Fill(data);
+                string uname;
+                string pwd;
+                if (data.Tables[0].Rows.Count > 0)
+                {
+                    uname = data.Tables[0].Rows[0]["Name"].ToString();
+                    pwd = data.Tables[0].Rows[0]["Password"].ToString();
+                    decryptPassword(pwd);
+                    if (uname == txtName.Text && decryptedpassword == txtPassword.Text)
+                    {
+                        Session["Name"] = uname;
+                        Response.Redirect("About.aspx");
+                    }
+                    else
+                    {
+                        lblMsg.Text = "Invalid";
+                    }
+                }
+            }
+        }                   //function to set login
     }
+    
+
 }

@@ -34,7 +34,8 @@
         </strong>
         </div>
     <p>
-        &nbsp;</p>
+        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/LoginForm.aspx">Allready have an account?</asp:HyperLink>
+        </p>
         <asp:Label ID="Label1" runat="server" Text="Please Enter the details"></asp:Label>
         <table class="auto-style1">
             <tr>
@@ -72,6 +73,19 @@
             <asp:Button ID="btnSave" runat="server" BackColor="#66FF99" CssClass="auto-style5" OnClick="btnSave_Click" Text="Save" />
         </div>
         <asp:Label ID="lblMsg" runat="server" Text="Label"></asp:Label>
+        <div class="auto-style4">
+            <asp:Button ID="btnView" runat="server" OnClick="btnView_Click" Text="View" />
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:BoundField DataField="Id" HeaderText="Id" />
+                    <asp:BoundField DataField="Name" HeaderText="Name" />
+                    <asp:BoundField DataField="Email" HeaderText="Email" />
+                    <asp:BoundField DataField="Phone" HeaderText="Phone" />
+                    <asp:BoundField DataField="Address" HeaderText="Address" />
+                    <asp:BoundField DataField="Password" HeaderText="Password" />
+                </Columns>
+            </asp:GridView>
+        </div>
     </form>
     </body>
 </html>

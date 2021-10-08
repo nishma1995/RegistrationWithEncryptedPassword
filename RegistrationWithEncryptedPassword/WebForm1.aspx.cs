@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -12,7 +14,7 @@ namespace RegistrationWithEncryptedPassword
     public partial class WebForm1 : System.Web.UI.Page
     {
         string encrytedPassword;
-        string connectionString = "Server=DESKTOP-LHCIT1T\\SQLEXPRESS;Database=RegistrationManagementSystem;Trusted_Connection=True";
+        DataLayer dataLayer = new DataLayer();
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,34 +30,68 @@ namespace RegistrationWithEncryptedPassword
         protected void btnSave_Click(object sender, EventArgs e)
         {
             encryption1();
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
+            setConnection();
+            //if (txtName.Text=txtEmail.Text=txtAddress.Text=txtPhone)
+            //{
 
-            SqlCommand command = new SqlCommand("EmployeeSave", connection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("Name", txtName.Text);
-            command.Parameters.AddWithValue("Email", txtEmail.Text);
-            command.Parameters.AddWithValue("Phone", txtPhone.Text);
-            command.Parameters.AddWithValue("Address", txtAddress.Text);
-            command.Parameters.AddWithValue("Password", encrytedPassword);
-            command.ExecuteNonQuery();
-            connection.Close();
-            lblMsg.Visible = true;
-            lblMsg.Text = "Successfully Registered";
-            txtName.Text = txtEmail.Text = txtPhone.Text = txtPassword.Text = txtAddress.Text = "";
-            
-
-            
-
-
+            //}
         }
-        public void encryption1()
+        public void encryption1()                   //function to encrypt the password 
         {
             string stringMessage = string.Empty;
             byte[] encode = new byte[txtPassword.Text.ToString().Length];
             encode = Encoding.UTF8.GetBytes(txtPassword.Text);
             stringMessage = Convert.ToBase64String(encode);
             encrytedPassword = stringMessage;
+        }
+        public void setConnection()         //function to connect with database
+        {
+            string connect = dataLayer.connection.ToString();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                SqlCommand command = new SqlCommand("EmployeeSave", con);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                con.Open();
+                command.Parameters.AddWithValue("Name", txtName.Text);
+                command.Parameters.AddWithValue("Email", txtEmail.Text);
+                command.Parameters.AddWithValue("Phone", txtPhone.Text);
+                command.Parameters.AddWithValue("Address", txtAddress.Text);
+                command.Parameters.AddWithValue("Password", encrytedPassword);
+                command.ExecuteNonQuery();
+                con.Close();
+                lblMsg.Visible = true;
+                lblMsg.Text = "Successfully Registered";
+                txtName.Text = txtEmail.Text = txtPhone.Text = txtPassword.Text = txtAddress.Text = "";
+
+            }
+
+        }
+
+        protected void btnView_Click(object sender, EventArgs e)
+        {
+
+            GetEmployee();
+            
+        }
+        public void GetEmployee()   //function to get employee list
+        {
+            string connect = dataLayer.connection.ToString();
+
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                SqlCommand command = new SqlCommand("EmployeeList", con);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                dataAdapter.SelectCommand = command;
+                con.Open();
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                GridView1.DataSource = dataTable;
+                GridView1.DataBind();
+                con.Close();
+                
+
+            }
         }
     }
 }
