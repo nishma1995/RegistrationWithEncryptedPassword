@@ -1,10 +1,56 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="RegistrationWithEncryptedPassword.WebForm1" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("[id*=btnSave]").click(function () {
+
+                if ($("#txtName").val()=="") {
+                    alert('Please Enter Name');
+                    $("#txtName").focus();
+                    return false;
+
+                }
+                if ($("#txtEmail").val()=="") {
+                    alert('Please Enter Email');
+                    $("#txtEmail").focus();
+                    return false;
+
+                }
+                if ($("#txtPhone").val()=="") {
+                    alert('Please Enter Phone');
+                    $("#txtPhone").focus();
+                    return false;
+
+                }
+
+                if ($("#txtAddress").val()=="") {
+                    alert('Please Enter Address');
+                    $("#txtAddress").focus();
+                    return false;
+
+                }
+                if ($("#txtPassword").val()=="") {
+                    alert('Please Enter Password');
+                    $("#txtPassword").focus();
+                    return false;
+
+                }
+                alert('okay');
+                return true;
+            })
+
+        });
+    </script>
     <style type="text/css">
         .auto-style1 {
             width: 100%;
@@ -27,9 +73,11 @@
             font-size:x-large
         }
     </style>
+   
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         <div style="text-align:center " class="auto-style6" ><strong>Registration Form
         </strong>
         </div>
@@ -42,18 +90,21 @@
                 <td class="auto-style2">Name</td>
                 <td class="auto-style3">
                     <asp:TextBox ID="txtName" runat="server" CssClass="auto-style5" Width="354px"></asp:TextBox>
+                    <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="txtName" ServiceMethod="GetNames" EnableCaching="true" MinimumPrefixLength="1" CompletionSetCount="1" CompletionInterval="10">
+
+                    </ajaxToolkit:AutoCompleteExtender>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style2">Email</td>
                 <td class="auto-style3">
-                    <asp:TextBox ID="txtEmail" runat="server" CssClass="auto-style5" Width="354px"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="auto-style5" Width="354px" TextMode="Email"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style2">Phone</td>
                 <td class="auto-style3">
-                    <asp:TextBox ID="txtPhone" runat="server" CssClass="auto-style5" Width="354px"></asp:TextBox>
+                    <asp:TextBox ID="txtPhone" runat="server" CssClass="auto-style5" Width="354px" TextMode="Number"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -70,7 +121,7 @@
             </tr>
         </table>
         <div class="auto-style4">
-            <asp:Button ID="btnSave" runat="server" BackColor="#66FF99" CssClass="auto-style5" OnClick="btnSave_Click" Text="Save" />
+            <asp:Button ID="btnSave" UseSubmitBehavior="false"  runat ="server" BackColor="#66FF99" CssClass="auto-style5" OnClick="btnSave_Click" Text="Save" OnClientClick="return false;"/>
         </div>
         <asp:Label ID="lblMsg" runat="server" Text="Label"></asp:Label>
         <div class="auto-style4">

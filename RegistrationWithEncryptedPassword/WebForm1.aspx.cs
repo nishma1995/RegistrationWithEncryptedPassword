@@ -6,6 +6,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -20,6 +22,34 @@ namespace RegistrationWithEncryptedPassword
         {
             
             lblMsg.Visible = false;
+        }
+        [ScriptMethod]
+        [WebMethod]
+        public static List<string> GetNames(string name)
+        {
+            DataLayer dataLayer = new DataLayer();
+
+            string connect = dataLayer.connection.ToString();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                con.Open();
+                SqlCommand command = new SqlCommand("EmployeeSearch", con);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@searchText", name);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+
+                List<string> names = new List<string>();
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    names.Add(dataTable.Rows[i][1].ToString());
+                  
+                }
+                return names;
+
+            }
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)

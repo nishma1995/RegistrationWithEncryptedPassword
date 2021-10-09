@@ -5,6 +5,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+     <script>
+         $(document).ready(function () {
+             $("#btnLogin").click(function () {
+
+                 if ($("#txtName").val() == "") {
+                     alert('Please Enter Name');
+                     $("#txtName").focus();
+                     $("#txtName").css("border", "1px solid red");
+                     return false;
+
+                 }
+                 else {
+                     $("#txtName").css("border", "1px solid green");
+                 }
+                 if ($("#txtPassword").val() == "") {
+                     alert('Please Enter Password');
+                     $("#txtPassword").focus();
+                     return false;
+
+                 }
+                 alert('okay');
+                 return true;
+             })
+
+         })
+     </script>
     <style type="text/css">
         .auto-style1 {
             width: 100%;
@@ -34,13 +62,13 @@
             <tr>
                 <td class="auto-style2">Password</td>
                 <td>
-                    <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style3">
-                    <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
+                    <asp:Button ID="btnLogin" UseSubmitBehavior="false" runat="server" Text="Login" OnClick="btnLogin_Click" OnClientClick="return false;" />
                 </td>
             </tr>
         </table>
