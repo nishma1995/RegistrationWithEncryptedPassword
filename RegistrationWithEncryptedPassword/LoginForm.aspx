@@ -59,11 +59,11 @@
             
         
         }
-        .container {
+       /* .container {
   padding: 150px;
   background-color:lightcyan;
   padding-left:400px;
-}
+}*/
      
 
 
@@ -79,10 +79,29 @@
 
 
         .auto-style6 {
-            font-size: xx-large;
+            font-size: x-large;
         }
         .auto-style7 {
             margin-left: 90px;
+        }
+        .form-container{
+            position:absolute;
+            top:15vh;
+            width:250%;
+            background-color:lightcyan;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px 0px #000;
+            padding-left:60px;
+            
+
+        }
+        .bg{
+            background:url('@C:\Users\USER\Downloads\images.jpg') no-repeat;
+            width:100%;
+            height:100vh;
+            background-size:100%;
+            padding-left:500px;
         }
      
 
@@ -90,7 +109,10 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <section class="container-fluid bg">
+        <section class="row justify-content-center">
+            <section class="col-12 col-sm-6 col-md-3">
+    <form id="form1" runat="server" class="form-container">
         <div style="text-align:center" class="auto-style6" ><strong>Login Form
         </strong>
         </div>
@@ -164,7 +186,9 @@
         </p>
         </div>
     </form>
-  
+            </section>
+            </section>
+  </section>
 </body>
 </html>
   <script>

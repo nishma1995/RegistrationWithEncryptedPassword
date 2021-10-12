@@ -92,7 +92,13 @@
         .container{
             padding:100px;
            background-color:cornsilk;
-            padding-left:400px;
+            padding-left:200px;
+             border-radius:10px;
+             box-shadow:0px 0px 10px 0px #000;
+             width:50%;
+             height:80%;
+
+
         }
         .auto-style9 {
             width: 456px;
@@ -139,8 +145,7 @@
                 <td class="auto-style7" style="background-color:cornsilk">
                    
                     <asp:TextBox ID="txtName" runat="server" CssClass="auto-style5" Width="354px" OnTextChanged="txtName_TextChanged" BackColor="White"></asp:TextBox>
-                    <%--  <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="txtName" ServiceMethod="GetNames" EnableCaching="true" MinimumPrefixLength="1" CompletionSetCount="1" CompletionInterval="10">--%>
-                   <%-- </ajaxToolkit:AutoCompleteExtender>--%>
+                    <%--  <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="txtName" ServiceMethod="GetNames" EnableCaching="true" MinimumPrefixLength="1" CompletionSetCount="1" CompletionInterval="10">--%>                   <%-- </ajaxToolkit:AutoCompleteExtender>--%>
                         
                 </td>
                 </tr>
@@ -188,7 +193,8 @@
            </tr>
             <tr>
                 <td class="auto-style3" style="background-color:cornsilk">
-                    &nbsp;</td>
+                    <asp:Button ID="btnView" runat="server" Text="View" Width="355px" />
+                </td>
            </tr>
             <tr>
                 <td class="auto-style3" style="background-color:cornsilk">
