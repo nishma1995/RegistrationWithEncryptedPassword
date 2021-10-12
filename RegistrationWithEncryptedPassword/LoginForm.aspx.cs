@@ -25,7 +25,7 @@ namespace RegistrationWithEncryptedPassword
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             setLogin();
-           
+
         }
 
         private void decryptPassword(string encryptedPassword)
@@ -73,7 +73,7 @@ namespace RegistrationWithEncryptedPassword
                     }
                 }
             }
-        }                   //function to set login
+        }
     }
     
 

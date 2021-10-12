@@ -23,10 +23,11 @@ namespace RegistrationWithEncryptedPassword
             
             lblMsg.Visible = false;
         }
-        [ScriptMethod]
+       
         [WebMethod]
-        public static List<string> GetNames(string name)
-        {
+        public static string[] GetNames1(string name)        //function to autocomplete textbox
+        {           
+
             DataLayer dataLayer = new DataLayer();
 
             string connect = dataLayer.connection.ToString();
@@ -40,16 +41,51 @@ namespace RegistrationWithEncryptedPassword
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
 
-                List<string> names = new List<string>();
-                for (int i = 0; i < dataTable.Rows.Count; i++)
+                List<string> rfqs = new List<string>();
+                if (dataTable.Rows.Count > 0)
                 {
-                    names.Add(dataTable.Rows[i][1].ToString());
-                  
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        rfqs.Add(string.Format("{0}", dataTable.Rows[i]["Name"].ToString()));
+                    }
                 }
-                return names;
+                return rfqs.ToArray();
 
             }
+        }
+        [WebMethod]
+        public static string[] GetEmail(string email)                    //function to autocomplete textbox
+        {
 
+            DataLayer dataLayer = new DataLayer();
+
+            string connect = dataLayer.connection.ToString();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                con.Open();
+                SqlCommand command = new SqlCommand("SearchEmail", con);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@searchText", email);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+
+                List<string> rfqs = new List<string>();
+                if (dataTable.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        rfqs.Add(string.Format("{0}", dataTable.Rows[i]["Email"].ToString()));
+                    }
+                }
+                return rfqs.ToArray();
+
+            }
+        }
+        public class autocomplete
+        {
+            public string label { get; set; }
+            public string value { get; set; }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -61,10 +97,7 @@ namespace RegistrationWithEncryptedPassword
         {
             encryption1();
             setConnection();
-            //if (txtName.Text=txtEmail.Text=txtAddress.Text=txtPhone)
-            //{
-
-            //}
+           
         }
         public void encryption1()                   //function to encrypt the password 
         {
@@ -75,6 +108,7 @@ namespace RegistrationWithEncryptedPassword
             encrytedPassword = stringMessage;
         }
         public void setConnection()         //function to connect with database
+        
         {
             string connect = dataLayer.connection.ToString();
             using (SqlConnection con = new SqlConnection(connect))
@@ -99,29 +133,17 @@ namespace RegistrationWithEncryptedPassword
 
         protected void btnView_Click(object sender, EventArgs e)
         {
-
-            GetEmployee();
+            Response.Redirect("View.aspx");
+           
             
         }
-        public void GetEmployee()   //function to get employee list
+       
+
+        protected void txtName_TextChanged(object sender, EventArgs e)
         {
-            string connect = dataLayer.connection.ToString();
 
-            using (SqlConnection con = new SqlConnection(connect))
-            {
-                SqlCommand command = new SqlCommand("EmployeeList", con);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
-                dataAdapter.SelectCommand = command;
-                con.Open();
-                DataTable dataTable = new DataTable();
-                dataAdapter.Fill(dataTable);
-                GridView1.DataSource = dataTable;
-                GridView1.DataBind();
-                con.Close();
-                
 
-            }
+
         }
     }
 }

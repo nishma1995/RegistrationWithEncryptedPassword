@@ -7,7 +7,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
     <script src="jquery-3.5.1.min.js"></script>
     <script>
 
@@ -53,11 +62,11 @@
     </script>
     <style type="text/css">
         .auto-style1 {
-            width: 100%;
+            width: 55%;
         }
         .auto-style2 {
             width: 248px;
-            background-color: #FFFFCC;
+            background-color:cornsilk;
         }
         .auto-style3 {
             width: 456px;
@@ -66,77 +75,218 @@
             margin-left: 640px;
         }
         .auto-style5 {
-            background-color: #FFFFCC;
+            background-color:cornsilk;
         }
         .auto-style6 {
             height: 48px;
             font-size:x-large
+        }
+        .auto-style7 {
+            width: 456px;
+            margin-left: 240px;
+        }
+        .auto-style8 {
+            width: 456px;
+            margin-left: 120px;
+        }
+        .container{
+            padding:100px;
+           background-color:cornsilk;
+            padding-left:400px;
+        }
+        .auto-style9 {
+            width: 456px;
+            height: 29px;
+        }
+        .auto-style10 {
+            width: 456px;
+            margin-left: 200px;
+        }
+        .auto-style11 {
+            width: 456px;
+            margin-left: 120px;
+            height: 20px;
+        }
+        .auto-style12 {
+            width: 456px;
+            margin-left: 120px;
+            height: 21px;
         }
     </style>
    
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
-        <div style="text-align:center " class="auto-style6" ><strong>Registration Form
+        <%--<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>--%>
+        <div style="text-align:center " class="auto-style6" >
+            <br />
+            <strong>
+            <br />
+            Registration Form
         </strong>
         </div>
     <p>
-        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/LoginForm.aspx">Allready have an account?</asp:HyperLink>
-        </p>
-        <asp:Label ID="Label1" runat="server" Text="Please Enter the details"></asp:Label>
+        &nbsp;</p>
+        <p>
+            &nbsp;</p>
+        <%--<asp:Label ID="Label1" runat="server" Text="Please Enter the details"></asp:Label>--%>
+          <div class="container">
         <table class="auto-style1">
             <tr>
-                <td class="auto-style2">Name</td>
-                <td class="auto-style3">
-                    <asp:TextBox ID="txtName" runat="server" CssClass="auto-style5" Width="354px"></asp:TextBox>
-                    <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="txtName" ServiceMethod="GetNames" EnableCaching="true" MinimumPrefixLength="1" CompletionSetCount="1" CompletionInterval="10">
-
-                    </ajaxToolkit:AutoCompleteExtender>
+                <td class="auto-style2" style="background-color:cornsilk">Name</td>
+                </tr>
+            <tr>
+                <td class="auto-style7" style="background-color:cornsilk">
+                   
+                    <asp:TextBox ID="txtName" runat="server" CssClass="auto-style5" Width="354px" OnTextChanged="txtName_TextChanged" BackColor="White"></asp:TextBox>
+                    <%--  <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="txtName" ServiceMethod="GetNames" EnableCaching="true" MinimumPrefixLength="1" CompletionSetCount="1" CompletionInterval="10">--%>
+                   <%-- </ajaxToolkit:AutoCompleteExtender>--%>
+                        
+                </td>
+                </tr>
+            
+            <tr>
+                <td class="auto-style2" style="background-color:cornsilk">Email</td>
+                </tr>
+            <tr>
+                <td class="auto-style3" style="background-color:cornsilk">
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="auto-style5" Width="354px" TextMode="Email" BackColor="White"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style2">Email</td>
-                <td class="auto-style3">
-                    <asp:TextBox ID="txtEmail" runat="server" CssClass="auto-style5" Width="354px" TextMode="Email"></asp:TextBox>
+                <td class="auto-style2" style="background-color:cornsilk">Phone</td>
+                </tr>
+            <tr>
+                <td class="auto-style3" style="background-color:cornsilk">
+                    <asp:TextBox ID="txtPhone" runat="server" CssClass="auto-style5" Width="354px" TextMode="Number" BackColor="White"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style2">Phone</td>
-                <td class="auto-style3">
-                    <asp:TextBox ID="txtPhone" runat="server" CssClass="auto-style5" Width="354px" TextMode="Number"></asp:TextBox>
+                <td class="auto-style2" style="background-color:cornsilk">Address</td>
+                </tr>
+            <tr>
+                <td class="auto-style3" style="background-color:cornsilk">
+                    <asp:TextBox ID="txtAddress" runat="server" CssClass="auto-style5" Width="354px" BackColor="White"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style2">Address</td>
-                <td class="auto-style3">
-                    <asp:TextBox ID="txtAddress" runat="server" CssClass="auto-style5" Width="354px"></asp:TextBox>
-                </td>
-            </tr>
+                <td class="auto-style2" style="background-color:cornsilk">Password</td>
+                 </tr>
             <tr>
-                <td class="auto-style2">Password</td>
-                <td class="auto-style3">
-                    <asp:TextBox ID="txtPassword" runat="server" CssClass="auto-style5" Width="354px" TextMode="Password"></asp:TextBox>
+                <td class="auto-style3" style="background-color:cornsilk">
+                    <asp:TextBox ID="txtPassword" runat="server" CssClass="auto-style5" Width="354px" TextMode="Password" BackColor="White"></asp:TextBox>
                 </td>
-            </tr>
+           </tr>
+            <tr>
+                <td class="auto-style3" style="background-color:cornsilk">
+                    &nbsp;</td>
+           </tr>
+            <tr>
+                <td class="auto-style9" style="background-color:cornsilk">
+            <asp:Button ID="btnSave"  runat ="server" BackColor="#66FF99" CssClass="auto-style5" OnClick="btnSave_Click" Text="Save"  class="btn btn-primary" Height="29px" Width="357px"/>
+                </td>
+           </tr>
+            <tr>
+                <td class="auto-style3" style="background-color:cornsilk">
+                    &nbsp;</td>
+           </tr>
+            <tr>
+                <td class="auto-style3" style="background-color:cornsilk">
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/LoginForm.aspx">Allready have an account?</asp:HyperLink>
+                </td>
+           </tr>
+            <tr>
+                <td class="auto-style11" style="background-color:cornsilk">
+                    &nbsp;</td>
+           </tr>
+            <tr>
+                <td class="auto-style12" style="background-color:cornsilk">
+                    <asp:HyperLink ID="viewEmployee" runat="server" NavigateUrl="~/View.aspx">View Registered Employees</asp:HyperLink>
+                </td>
+           </tr>
+            <tr>
+                <td class="auto-style8" style="background-color:cornsilk">
+                    &nbsp;</td>
+           </tr>
+            <tr>
+                <td class="auto-style10" style="background-color:cornsilk">
+                    &nbsp;</td>
+           </tr>
         </table>
         <div class="auto-style4">
-            <asp:Button ID="btnSave" UseSubmitBehavior="false"  runat ="server" BackColor="#66FF99" CssClass="auto-style5" OnClick="btnSave_Click" Text="Save" OnClientClick="return false;"/>
+            <br />
         </div>
-        <asp:Label ID="lblMsg" runat="server" Text="Label"></asp:Label>
+              </div>
+        <asp:Label ID="lblMsg" runat="server" Text="Label" Visible="False"></asp:Label>
         <div class="auto-style4">
-            <asp:Button ID="btnView" runat="server" OnClick="btnView_Click" Text="View" />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false">
-                <Columns>
-                    <asp:BoundField DataField="Id" HeaderText="Id" />
-                    <asp:BoundField DataField="Name" HeaderText="Name" />
-                    <asp:BoundField DataField="Email" HeaderText="Email" />
-                    <asp:BoundField DataField="Phone" HeaderText="Phone" />
-                    <asp:BoundField DataField="Address" HeaderText="Address" />
-                    <asp:BoundField DataField="Password" HeaderText="Password" />
-                </Columns>
-            </asp:GridView>
         </div>
     </form>
+     <script>
+         $("#txtName").autocomplete({
+             source: function (request, response) {
+                 var objdata = { "name": $("#txtName").val() };
+                 $.ajax({
+                     url: "webform1.aspx/GetNames1",
+                     data: JSON.stringify(objdata),
+                     type: "POST",
+                     contentType: "application/json; charset=utf-8",
+                     dataFilter: function (data) { return data; },
+                     success: function (data) {
+                         response($.map(data.d, function (item) {
+                             return {
+                                 label: item
+                             }
+                         }))
+                     },
+                     error: function (response) {
+                         alert(response.responseText);
+                     },
+                     failure: function (response) {
+                         alert(response.responseText);
+                     },
+                 });
+             },
+             autoFocus: true,
+             select: function (e, i) {
+                 $("#txtName").val(i.item.label);
+             },
+             focus: function (event, ui) { event.preventDefault(); },
+             minLength: 2
+         });
+     </script>
+     <script>
+         $("#txtEmail").autocomplete({
+             source: function (request, response) {
+                 var objdata = { "email": $("#txtEmail").val() };
+                 $.ajax({
+                     url: "webform1.aspx/GetEmail",
+                     data: JSON.stringify(objdata),
+                     type: "POST",
+                     contentType: "application/json; charset=utf-8",
+                     dataFilter: function (data) { return data; },
+                     success: function (data) {
+                         response($.map(data.d, function (item) {
+                             return {
+                                 label: item
+                             }
+                         }))
+                     },
+                     error: function (response) {
+                         alert(response.responseText);
+                     },
+                     failure: function (response) {
+                         alert(response.responseText);
+                     },
+                 });
+             },
+             autoFocus: true,
+             select: function (e, i) {
+                 $("#txtEmail").val(i.item.label);
+             },
+             focus: function (event, ui) { event.preventDefault(); },
+             minLength: 2
+         });
+         </script>
+
     </body>
 </html>
