@@ -49,5 +49,23 @@ namespace RegistrationWithEncryptedPassword
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             Context.Response.Write(serializer.Serialize(employees));
         }
+        [WebMethod]
+        public int DeleteFile(int id)
+        {
+            string connect = dataLayer.connection.ToString();
+            List<Employee> files = new List<Employee>();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                SqlCommand cmd = new SqlCommand("EmployeeDelete", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", id);
+                con.Open();
+                int i = Convert.ToInt32(cmd.ExecuteScalar());
+                con.Close();
+
+                return i;
+            }
+        }
+        //public void EditEmployee()
     }
 }
