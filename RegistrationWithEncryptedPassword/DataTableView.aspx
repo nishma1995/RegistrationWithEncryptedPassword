@@ -28,7 +28,7 @@
                             { 'data': 'Password' },
                             {
                                 "data": "Id", "render": function () {
-                                    return "<a class='btn btn-default btn-sm'<i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' onclick=Delete("+data+")><i class='fa fa-trash'></i> Delete</a>";
+                                    return "<a class='btn btn-default btn-sm'<i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' onclick=Delete(" + data + ")><i class='fa fa-trash'></i>Delete</a>";
                                 },
                                 "orderable": false,
                                 "width":"150px"
@@ -40,6 +40,7 @@
                 }
             });
         });
+       
         function Delete(id) {
             if (confirm('Are You Sure to Delete?')) {
                 $.ajax({
@@ -58,7 +59,7 @@
                 });
             }
         }
-</script>
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
