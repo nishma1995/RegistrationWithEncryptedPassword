@@ -18,7 +18,7 @@ namespace RegistrationWithEncryptedPassword
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-     [System.Web.Script.Services.ScriptService]
+    [System.Web.Script.Services.ScriptService]
     public class EmployeeService : System.Web.Services.WebService
     {
         DataLayer dataLayer = new DataLayer();
@@ -66,6 +66,27 @@ namespace RegistrationWithEncryptedPassword
                 return i;
             }
         }
-        //public void EditEmployee()
+
+        [WebMethod]
+        public void Update(int id, string name, string email, string phone, string address)
+        {
+            string connect = dataLayer.connection.ToString();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                SqlCommand cmd = new SqlCommand("EmployeeUpdate", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                con.Open();
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Phone", phone);
+                cmd.Parameters.AddWithValue("@Adress", address);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+
+
+            }
+        }
     }
 }

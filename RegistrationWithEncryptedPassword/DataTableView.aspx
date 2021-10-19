@@ -26,39 +26,62 @@
                             { 'data': 'Phone' },
                             { 'data': 'Address' },
                             { 'data': 'Password' },
+                            //{
+                            //    "data": "Id", "render": function () {
+                            //        return "<a class='btn btn-default btn-sm'<i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' onclick=Delete(" + data + ")><i class='fa fa-trash'></i>Delete</a>";
+                            //    },
+                            //    "orderable": false,
+                            //    "width":"150px"
+                            //}
                             {
-                                "data": "Id", "render": function () {
-                                    return "<a class='btn btn-default btn-sm'<i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' onclick=Delete(" + data + ")><i class='fa fa-trash'></i>Delete</a>";
-                                },
-                                "orderable": false,
-                                "width":"150px"
-                            }
+                                "data": null,
+                                "defaultContent": '<input type="button" id="btnEdit" class="btn btn-primary" value="Edit" />'
+                            },
+                            {
+                                'data': null,
+                            'defaultContent':'<input type="button" id="btnDelete" class="btn btn-danger" value="Delete">'}
                            
                         ]
 
+
+                    });
+                }
+            });
+            $('body').on('click', '[id*=btnEdit]', function () {
+                var row = $(this).parents('tr');
+                var id = $(row).find('td').eq(0).html();
+                $.ajax({
+                    type: 'POST',
+                    url: '<%= Page.ResolveUrl("~/Create.aspx/Update")%>',
+                    data: '{id: ' + id +
+                        '}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                });
+            });
+            $('body').on('click', '[id*=btnDelete]', function () {
+                if (confirm("Do you want to delete this record?")) {
+                    var row = $(this).parents('tr');
+                    var id = $(row).find('td').eq(0).html();
+                    $.ajax({
+                        type: 'POST',
+                        url: '<%= Page.ResolveUrl("~/EmployeeService.asmx/DeleteFile")%>',
+                        data: '{id: ' + id + '}',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.d == 1) {
+                                $(row).remove();
+                            }
+                        }
                     });
                 }
             });
         });
        
-        function Delete(id) {
-            if (confirm('Are You Sure to Delete?')) {
-                $.ajax({
-                    type: "POST",
-                    url: 'EmployeeService.asmx/DeleteFile/'+id,
-                    success: function (data) {
-                        if (data.success) {
-                            DataTable.ajax.reload()
-                            $.notify(data.message, {
-                                globalPosition: "top center",
-                                className:"success"
-                            })
-                        }
+       
 
-                    }
-                });
-            }
-        }
+                    
     </script>
 </head>
 <body>
