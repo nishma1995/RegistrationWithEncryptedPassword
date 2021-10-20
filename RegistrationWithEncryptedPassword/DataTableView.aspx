@@ -50,19 +50,25 @@
             $('body').on('click', '[id*=btnEdit]', function () {
                 var row = $(this).parents('tr');
                 var id = $(row).find('td').eq(0).html();
+                alert(id);
                 $.ajax({
                     type: 'POST',
                     url: '<%= Page.ResolveUrl("~/Create.aspx/Update")%>',
-                    data: '{id: ' + id +
-                        '}',
+                    data: '{id: ' + id + '}',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
+                    success: function (response) {
+                       
+                    }
                 });
             });
-            $('body').on('click', '[id*=btnDelete]', function () {
+            $('body').on('click', '[id*=btnDelete]', function (id) {
                 if (confirm("Do you want to delete this record?")) {
                     var row = $(this).parents('tr');
                     var id = $(row).find('td').eq(0).html();
+                    //alert(id);
+                   
+                    //var id = row.find("span").html();
                     $.ajax({
                         type: 'POST',
                         url: '<%= Page.ResolveUrl("~/EmployeeService.asmx/DeleteFile")%>',
@@ -70,9 +76,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            if (response.d == 1) {
+                            /*if (response.d == 1) {*/
                                 $(row).remove();
-                            }
+                               /* $(this).closest("tr").remove()*/
+                           // }
                         }
                     });
                 }

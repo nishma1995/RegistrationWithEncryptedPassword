@@ -127,7 +127,7 @@
             <br />
             <strong>
             <br />
-            Registration Form
+            
         </strong>
         </div>
     <p>
