@@ -143,7 +143,7 @@
                 <td class="auto-style7" style="background-color:cornsilk">
                    
                     <asp:TextBox ID="txtName" runat="server" CssClass="auto-style5" Width="354px" OnTextChanged="txtName_TextChanged" BackColor="White"></asp:TextBox>
-                    <%--  <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="txtName" ServiceMethod="GetNames" EnableCaching="true" MinimumPrefixLength="1" CompletionSetCount="1" CompletionInterval="10">--%>                   <%-- </ajaxToolkit:AutoCompleteExtender>--%>
+                    <%--  <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="txtName" ServiceMethod="GetNames" EnableCaching="true" MinimumPrefixLength="1" CompletionSetCount="1" CompletionInterval="10">--%><%-- </ajaxToolkit:AutoCompleteExtender>--%>
                         
                 </td>
                 </tr>
@@ -153,7 +153,7 @@
                 </tr>
             <tr>
                 <td class="auto-style3" style="background-color:cornsilk">
-                    <asp:TextBox ID="txtEmail" runat="server" CssClass="auto-style5" Width="354px" TextMode="Email" BackColor="White"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="auto-style5" Width="354px" BackColor="White"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -191,7 +191,9 @@
            </tr>
             <tr>
                 <td class="auto-style3" style="background-color:cornsilk">
-                    <asp:Button ID="btnView" runat="server" Text="View" Width="355px" />
+                    <br />
+                    <asp:Button ID="btnView1" runat="server" Height="22px" OnClick="btnView1_Click" Text="View" Width="358px" />
+                    <br />
                 </td>
            </tr>
             <tr>

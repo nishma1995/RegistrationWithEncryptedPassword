@@ -133,9 +133,10 @@ namespace RegistrationWithEncryptedPassword
 
         protected void btnView_Click(object sender, EventArgs e)
         {
-            Response.Redirect("View.aspx");
-           
-            
+            //Response.Redirect("DataTableView.aspx");
+            Server.Transfer("DataTableView.aspx");
+
+
         }
        
 
@@ -145,5 +146,11 @@ namespace RegistrationWithEncryptedPassword
 
 
         }
+
+        protected void btnView1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DataTableView.aspx");
+        }
+
     }
 }
